@@ -2,12 +2,12 @@
   "name": "notification-bar-app",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/frontend.tsx",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "react": "^18.1.0"
   }
