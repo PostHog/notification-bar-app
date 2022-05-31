@@ -1,0 +1,20 @@
+{
+    "name": "Notification Bar",
+    "url": "https://github.com/PostHog/notification-bar-app",
+    "description": "PostHog frontend demo polugin",
+    "main": "index.ts",
+    "frontend": "src/frontend.tsx",
+    "config": [
+        {
+            "markdown": "Specify your config here"
+        },
+        {
+            "key": "flagKey",
+            "name": "Key of the feature flag this plugin will use",
+            "type": "string",
+            "hint": "Only alphanumeric with dashes and underscores",
+            "default": "notification-bar",
+            "required": false
+        }
+    ]
+}
