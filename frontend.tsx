@@ -39,7 +39,18 @@ function NotificationBar({ config }) {
             />
             <br />
             <LemonSwitch label="Enabled" checked={enabled} onChange={setEnabled} />
-            <LemonSwitch label="Allow HTML" checked={payload.html} onChange={(html) => updatePayload({ html })} />
+            <div style={{ display: 'flex' }}>
+                <LemonSwitch label="Allow HTML" checked={payload.html} onChange={(html) => updatePayload({ html })} />
+                {payload.html ? (
+                    <div>
+                        <strong style={{ color: 'red' }}>Please note!</strong> Enabling HTML support lets anyone with
+                        access to this PostHog project inject arbitrary code on your website.
+                        <br />
+                        This may or may not be what you want to do. At the end of the day, we're just passing a string
+                        to your app, so customize the code below to suit your needs.
+                    </div>
+                ) : null}
+            </div>
             <LemonSwitch
                 label="Fixed positioning"
                 checked={payload.fixed}
