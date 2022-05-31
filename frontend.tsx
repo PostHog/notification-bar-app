@@ -4,6 +4,7 @@ import { api, lemonToast, LemonSwitch, LemonInput, LemonTextArea, LemonButton } 
 interface FlagVariantPayload {
     message: string
     fixed: boolean
+    html: boolean
     color: string
     background: string
 }
@@ -14,36 +15,8 @@ const defaultPayload: FlagVariantPayload = {
     color: '#fef6f6',
     background: '#920c0c',
     fixed: true,
+    html: false,
 }
-
-const frontendCode = (flagKey: string, color: string, background: string, fixed: boolean) =>
-    `
-posthog.onFeatureFlags((_, flags) => {
-    if (!(${JSON.stringify(flagKey)} in flags)) {
-        return; 
-    }
-    try {
-        var payload = JSON.parse(atob(flags[${JSON.stringify(flagKey)}].replace(/\_/g, '=').replace(/\-/g, '+')))
-        var div = document.createElement('div')
-        div.style.color = payload.color || ${JSON.stringify(color)}
-        div.style.background = payload.background || ${JSON.stringify(background)}
-        div.style.padding = '5px 10px'
-        if ("fixed" in payload ? payload.fixed : ${JSON.stringify(fixed)}) {
-            div.style.position = 'fixed'
-            div.style.top = 0
-            div.style.width = '100%'
-            div.style.zIndex = 100000
-        }
-        div.style.cursor = 'pointer'
-        div.addEventListener('click', () => div.remove())
-        div.innerHTML = payload.message
-        document.body.prepend(div)
-    } catch (e) {
-        console.error("Could not parse notification bar payload: " + message)
-        throw e
-    }
-})
-`.trim()
 
 function NotificationBar({ config }) {
     const flagKey = config.flagKey || defaultKey
@@ -52,7 +25,7 @@ function NotificationBar({ config }) {
 
     return !loading ? (
         <div>
-            <label>Message (HTML)</label>
+            <label>Message</label>
             <LemonTextArea value={payload.message} onChange={(message) => updatePayload({ message })} />
             <br />
             <label>Text color</label>
@@ -66,6 +39,7 @@ function NotificationBar({ config }) {
             />
             <br />
             <LemonSwitch label="Enabled" checked={enabled} onChange={setEnabled} />
+            <LemonSwitch label="Allow HTML" checked={payload.html} onChange={(html) => updatePayload({ html })} />
             <LemonSwitch
                 label="Fixed positioning"
                 checked={payload.fixed}
@@ -78,7 +52,35 @@ function NotificationBar({ config }) {
 
             <h1 style={{ marginTop: '2rem' }}>One time setup</h1>
             <p>Copy the following code to your site. Try it now with the devtools console.</p>
-            <pre>{frontendCode(flagKey, payload.color, payload.background, payload.fixed)}</pre>
+            <pre>
+                {`
+posthog.onFeatureFlags((_, flags) => {
+    if (!(${JSON.stringify(flagKey)} in flags)) {
+        return; 
+    }
+    try {
+        var payload = JSON.parse(atob(flags[${JSON.stringify(flagKey)}].replace(/\_/g, '=').replace(/\-/g, '+')))
+        var div = document.createElement('div')
+        div.style.color = payload.color || ${JSON.stringify(payload.color)}
+        div.style.background = payload.background || ${JSON.stringify(payload.background)}
+        div.style.padding = '5px 10px'
+        if ("fixed" in payload ? payload.fixed : ${JSON.stringify(payload.fixed)}) {
+            div.style.position = 'fixed'
+            div.style.top = 0
+            div.style.width = '100%'
+            div.style.zIndex = 100000
+        }
+        div.style.cursor = 'pointer'
+        div.addEventListener('click', () => div.remove())
+        div.${payload.html ? 'innerHTML' : 'innerText'} = payload.message
+        document.body.prepend(div)
+    } catch (e) {
+        console.error("Could not parse notification bar payload: " + message)
+        throw e
+    }
+})
+`.trim()}
+            </pre>
         </div>
     ) : (
         <div>Loading...</div>
