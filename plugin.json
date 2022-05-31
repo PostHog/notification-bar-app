@@ -2,7 +2,6 @@
     "name": "Notification Bar",
     "url": "https://github.com/PostHog/notification-bar-app",
     "description": "Show a notification bar for your users through a feature flag",
-    "frontend": "src/frontend.tsx",
     "config": [
         {
             "key": "flagKey",

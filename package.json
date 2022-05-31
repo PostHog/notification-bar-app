@@ -2,7 +2,7 @@
   "name": "notification-bar-app",
   "version": "1.0.0",
   "description": "",
-  "main": "src/frontend.tsx",
+  "main": "frontend.tsx",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
