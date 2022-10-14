@@ -30,6 +30,9 @@ export function inject({ config }) {
         .notification-bar a {
             color: ${config.linkColor || config.textColor || 'default'};
         }
+        .notification-bar p {
+            margin: 0;
+        }
         ${config.cssOverride || ''}
     `
     const paragraph = Object.assign(document.createElement('p'), {
