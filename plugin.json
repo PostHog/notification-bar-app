@@ -7,7 +7,7 @@
             "key": "notification",
             "name": "HTML to show in the notification bar",
             "type": "string",
-            "default": "<strong>SITE DOWN!</strong> <a href='https://google.com'>Click here</a> for alternatives.",
+            "default": "🚀 <strong>Product 2.0!</strong> is out! <a href='https://google.com'>Click here</a> to learn more.",
             "required": true,
             "site": true
         },
@@ -24,7 +24,7 @@
             "key": "backgroundColor",
             "name": "Background color",
             "type": "string",
-            "default": "rgba(0,0,0,0.8)",
+            "default": "#ebece8",
             "required": true,
             "site": true
         },
@@ -32,7 +32,7 @@
             "key": "textColor",
             "name": "Text color",
             "type": "string",
-            "default": "white",
+            "default": "#333",
             "required": true,
             "site": true
         },
@@ -40,7 +40,7 @@
             "key": "linkColor",
             "name": "Link color",
             "type": "string",
-            "default": "yellow",
+            "default": "#f64e00",
             "required": true,
             "site": true
         },
@@ -50,6 +50,15 @@
             "type": "string",
             "default": ".notification-bar { }",
             "required": false,
+            "site": true
+        },
+        {
+            "key": "rememberClose",
+            "name": "Remember close",
+            "type": "choice",
+            "choices": ["yes", "no"],
+            "default": "yes",
+            "hint": "Remember if the user has closed the notification bar, and don't shor it again. This resets if you update the notification bar's text.",
             "site": true
         }
     ]
