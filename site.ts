@@ -1,4 +1,10 @@
 export function inject({ config }) {
+    if (config.domains) {
+        const domains = config.domains.split(',').map((domain) => domain.trim())
+        if (domains.length > 0 && domains.indexOf(window.location.hostname) === -1) {
+            return
+        }
+    }
     const localStorageKey = `notification-${config.notification}`
     if (config.rememberClose === 'yes' && localStorage.getItem(localStorageKey)) {
         return
@@ -11,7 +17,7 @@ export function inject({ config }) {
         .notification-bar {
             width: 100%;
             min-height: 56px;
-            text-height: 24px;
+            line-height: 36px;
             font-size: 24px;
             color: ${config.textColor || 'default'};
             background: ${config.backgroundColor || 'default'};
