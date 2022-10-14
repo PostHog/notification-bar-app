@@ -4,12 +4,53 @@
     "description": "Show a notification bar for your users through a feature flag",
     "config": [
         {
-            "key": "flagKey",
-            "name": "Key of the feature flag this plugin will use",
+            "key": "notification",
+            "name": "HTML to show in the notification bar",
             "type": "string",
-            "hint": "Only alphanumeric with dashes and underscores",
-            "default": "notification-bar",
-            "required": true
+            "default": "<strong>SITE DOWN!</strong> <a href='https://google.com'>Click here</a> for alternatives.",
+            "required": true,
+            "site": true
+        },
+        {
+            "key": "position",
+            "name": "Position of the notification bar",
+            "type": "choice",
+            "choices": ["sticky", "top-of-page"],
+            "default": "sticky",
+            "required": true,
+            "site": true
+        },
+        {
+            "key": "backgroundColor",
+            "name": "Background color",
+            "type": "string",
+            "default": "rgba(0,0,0,0.8)",
+            "required": true,
+            "site": true
+        },
+        {
+            "key": "textColor",
+            "name": "Text color",
+            "type": "string",
+            "default": "white",
+            "required": true,
+            "site": true
+        },
+        {
+            "key": "linkColor",
+            "name": "Link color",
+            "type": "string",
+            "default": "yellow",
+            "required": true,
+            "site": true
+        },
+        {
+            "key": "cssOverride",
+            "name": "CSS override",
+            "type": "string",
+            "default": ".notification-bar { }",
+            "required": false,
+            "site": true
         }
     ]
 }

@@ -1,14 +1,14 @@
 {
-  "name": "notification-bar-app",
-  "version": "1.0.0",
-  "description": "",
-  "main": "frontend.tsx",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "MIT",
-  "devDependencies": {
-    "react": "^18.1.0"
-  }
+    "name": "notification-bar-app",
+    "version": "1.0.0",
+    "description": "",
+    "author": "",
+    "license": "MIT",
+    "scripts": {
+        "start": "app-dev-server"
+    },
+    "dependencies": {},
+    "devDependencies": {
+        "@posthog/app-dev-server": "^1.1.1"
+    }
 }
