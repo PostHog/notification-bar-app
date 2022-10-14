@@ -1,7 +1,7 @@
 {
     "name": "Notification Bar",
     "url": "https://github.com/PostHog/notification-bar-app",
-    "description": "Show a notification bar for your users through a feature flag",
+    "description": "Show a notification bar for your users",
     "config": [
         {
             "markdown": "## MANUAL STEP NOTICE: This app needs to injects code into your website through posthog-js. You need to **opt-in** on your site to enable this behaviour.\n\n```\nposthog.init(\"api_key\", {\n  \"api_host\": \"https://app.posthog.com\",\n  \"opt_in_site_apps\": true,\n})\n```"
