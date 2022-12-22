@@ -53,6 +53,8 @@ export function inject({ config }) {
             if (!e.target.matches('a,button')) {
                 notificationElement.style.display = 'none'
                 notificationElementContainer.style.display = 'none'
+                let oldLocalStorageKey = Object.keys(window.localStorage).find(key => key.includes('notification-bar-'))
+                window.localStorage.removeItem(oldLocalStorageKey)
                 window.localStorage.setItem(localStorageKey, 'true')
             }
         },
