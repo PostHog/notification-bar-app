@@ -5,7 +5,7 @@ export function inject({ config }) {
             return
         }
     }
-    const localStorageKey = `notification-${config.notification}`
+    const localStorageKey = `notification-bar-${config.notification}`
     if (config.rememberClose === 'yes' && localStorage.getItem(localStorageKey)) {
         return
     }
