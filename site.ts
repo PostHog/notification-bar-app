@@ -68,12 +68,14 @@ export function inject({ config }) {
 }
 
 function getKeyFromNotification(text) {
-    const noSpacesText = text.replace(/ /g, '');
-    const start = noSpacesText.substring(0, 12)
-    const middle = noSpacesText.substring(Math.floor(noSpacesText.length / 2) - 6, Math.floor(noSpacesText.length / 2) + 6)
-    const end = noSpacesText.substring(noSpacesText.length - 12)
-    const key = start + middle + end
-    return window.btoa(encodeURIComponent(key))
+    let hash = 0
+    if (text.length == 0) return hash
+    for (let i = 0; i < text.length; i++) {
+      let char = text.charCodeAt(i)
+      hash = (hash << 5) - hash + char
+      hash = hash & hash
+    }
+    return window.btoa(encodeURIComponent(hash))
 }
 
 function createShadowRoot(style) {
