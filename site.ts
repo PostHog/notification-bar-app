@@ -5,7 +5,7 @@ export function inject({ config }) {
             return
         }
     }
-    const localStorageKey = `notification-bar-${config.notification}`
+    const localStorageKey = 'notification-bar-' + getKeyFromNotification(config.notification)
     if (config.rememberClose === 'yes' && localStorage.getItem(localStorageKey)) {
         return
     }
@@ -65,6 +65,15 @@ export function inject({ config }) {
     notificationElementContainer.appendChild(notificationElement)
     shadow.appendChild(notificationElementContainer)
     document.body.prepend(shadow)
+}
+
+function getKeyFromNotification(text) {
+    const noSpacesText = text.replace(/ /g, '');
+    const start = noSpacesText.substring(0, 12)
+    const middle = noSpacesText.substring(Math.floor(noSpacesText.length / 2) - 6, Math.floor(noSpacesText.length / 2) + 6)
+    const end = noSpacesText.substring(noSpacesText.length - 12)
+    const key = start + middle + end
+    return window.btoa(encodeURIComponent(key))
 }
 
 function createShadowRoot(style) {
