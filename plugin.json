@@ -69,7 +69,7 @@
             "type": "choice",
             "choices": ["yes", "no"],
             "default": "yes",
-            "hint": "Remember if the user has closed the notification bar, and don't shor it again. This resets if you update the notification bar's text.",
+            "hint": "Remember if the user has closed the notification bar, and don't show it again. This resets if you update the notification bar's text.",
             "site": true
         }
     ]
