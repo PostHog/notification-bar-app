@@ -9,6 +9,7 @@
 ## Demo
 ![2022-10-14 13 28 39](https://user-images.githubusercontent.com/53387/195836509-a403817c-35f1-475c-a782-a6343511c361.gif)
 
+
 ## Local development
 
 If you wish to make this a juicier example app, then clone the repo and run the following:
