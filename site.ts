@@ -5,7 +5,7 @@ export function inject({ config }) {
             return
         }
     }
-    const localStorageKey = `notification-${config.notification}`
+    const localStorageKey = 'notification-bar-' + getKeyFromNotification(config.notification)
     if (config.rememberClose === 'yes' && localStorage.getItem(localStorageKey)) {
         return
     }
@@ -53,6 +53,8 @@ export function inject({ config }) {
             if (!e.target.matches('a,button')) {
                 notificationElement.style.display = 'none'
                 notificationElementContainer.style.display = 'none'
+                let oldLocalStorageKey = Object.keys(window.localStorage).find(key => key.includes('notification-bar-'))
+                window.localStorage.removeItem(oldLocalStorageKey)
                 window.localStorage.setItem(localStorageKey, 'true')
             }
         },
@@ -63,6 +65,17 @@ export function inject({ config }) {
     notificationElementContainer.appendChild(notificationElement)
     shadow.appendChild(notificationElementContainer)
     document.body.prepend(shadow)
+}
+
+function getKeyFromNotification(text) {
+    let hash = 0
+    if (text.length == 0) return hash
+    for (let i = 0; i < text.length; i++) {
+      let char = text.charCodeAt(i)
+      hash = (hash << 5) - hash + char
+      hash = hash & hash
+    }
+    return window.btoa(encodeURIComponent(hash))
 }
 
 function createShadowRoot(style) {
